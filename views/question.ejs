@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Question</title>
+</head>
+<body>
+    <h2>Post a Question</h2>
+    <form action="/question" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <button type="submit">Post Question</button>
+    </form>
+    <p><a href="/questions">View All Questions</a></p>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Question</title>
+</head>
+<body>
+    <h2>Post a Question</h2>
+    <form id="questionForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <button type="submit">Post Question</button>
+    </form>
+    <script>
+        function getToken() {
+            return localStorage.getItem('jwtToken');
+        }
+
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const token = getToken();
+            
+            fetch('/question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ title, description })
+            })
+            .then(response => {
+                if (response.status === 401) {
+                    window.location.href = '/login';
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Handle the response data
+                // window.location.href = '/questions';
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html> -->

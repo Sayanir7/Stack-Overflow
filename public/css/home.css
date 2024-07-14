@@ -1,0 +1,90 @@
+
+
+body{
+    background-color: rgb(3, 0, 31);
+    margin: 0;
+    padding: 0;
+}
+
+/* mainbody stylling  */
+
+.mainbody{
+    display: flex;
+    position: relative;
+    top: 7rem;
+
+}
+.main-mid{
+    
+    height: fit-content;
+    width: 47rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #8584e0;
+    border-left: solid rgb(48, 53, 146) 1px;
+    border-right: solid rgb(48, 53, 146) 1px;
+}
+.main-left{
+    /* background-color: rgb(192, 188, 182); */
+    height: fit-content;
+    width: 23rem;
+}
+.main-right{
+    /* background-color: rgb(192, 188, 182); */
+    height: fit-content;
+    width: 25rem;
+}
+.eachQues{
+    border: solid 1px;
+    border-radius: 10px;;
+    background-color: rgb(192, 190, 211);
+    box-shadow: 5px 5px 5px rgb(4, 4, 123);
+    
+}
+
+
+/* ::selection {
+    background-color: #0a0884;
+    color: #fff;
+}
+ */
+
+
+/* .mainbody{
+    display: flex;
+    position: relative;
+    top: 5rem;
+
+}
+
+.main-mid{
+    
+    
+    height: fit-content;
+    width: 47rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #8584e0;
+    border-left: solid rgb(255, 255, 255) 1px;
+    border-right: solid rgb(255, 255, 255) 1px;
+}
+.main-left{
+    
+    height: fit-content;
+    width: 26rem;
+}
+.main-right{
+    
+    height: fit-content;
+    width:20rem;
+}
+.eachQues{
+    border: solid 1px;
+    border-radius: 10px;;
+    background-color: rgb(192, 190, 211);
+    box-shadow: 5px 5px 5px rgb(4, 4, 123);
+    
+}
+
+ */

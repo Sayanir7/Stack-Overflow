@@ -1,0 +1,213 @@
+<% questions.forEach(question => { %>
+            <li>
+                <a href="/question/<%= question._id %>"><%= question.title %></a>  <%= question.description %>
+            </li>
+        <% }); %>
+
+
+
+
+
+<ul>
+        <% questions.forEach(question => { %>
+            <li>
+                <a href="/question/<%= question._id %>"><%= question.title %></a> by <%= question.username %>
+            </li>
+        <% }); %>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+<!-- <p><a href="/question">Post a New Question</a></p>
+<a href="/my-question">My questions</a>
+<a href="/logout">Logout</a> -->
+
+
+
+header.scrolled {
+    background-color: #0c0594;
+    position: fixed;
+    margin-top: 0;
+    top: 0;
+    padding: 0px;
+    box-shadow:0px 5px 5px rgb(27, 16, 182);
+}
+
+
+
+
+
+
+<h2>Login</h2>
+    <% if (message) { %>
+        <p><%= message %></p>
+    <% } %>
+    <form action="/login" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/signup">Signup here</a></p>
+
+
+
+
+
+
+
+
+ <h2><%= question.title %></h2>
+    <p><%= question.description %></p>
+    <p>Posted by <%= question.username %></p>
+
+    <h3>Answers</h3>
+    <ul>
+        <% answers.forEach(answer => { %>
+            <li>
+                <%= answer.answer %> by <%= answer.username %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <h3>Post an Answer</h3>
+    <form action="/answer" method="POST">
+        <input type="hidden" name="questionId" value="<%= question._id %>">
+        <label for="answer">Your Answer:</label><br>
+        <textarea id="answer" name="answer" rows="4" cols="50" required></textarea><br>
+        <button type="submit">Post Answer</button>
+    </form>
+    
+    <p><a href="/questions">Back to All Questions</a></p>
+
+
+
+
+ <ul class="answers">
+                            <li><h3><%= answer.answer%></h3>
+                                <p><%= answer.author %></p>
+                                <p>Date: <%= answer.createdAt %></p>
+                            </li>
+                           
+                        </ul>
+
+
+
+
+
+                 <ul>
+                    <% questionsWithAnswers.forEach(item => { %>
+                        <li>
+                            <h3><%= item.question.title %></h3>
+                            <p><%= item.question.description %></p>
+                            <p>Posted by <%= item.question.username %> on <%= item.question.createdAt %></p>
+                            
+                            <h4>Answers:</h4>
+                            <ul>
+                                <% item.answers.forEach(answer => { %>
+                                    <li>
+                                        <p><%= answer.answer %></p>
+                                        <p>Answered by <%= answer.username %> on <%= answer.createdAt %></p>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% }); %>
+                </ul>
+
+
+
+
+
+
+
+                <% questionsWithAnswers.forEach(item => { %>
+                    <ul>
+                        <ul class="ques" >
+                            <h1><%= item.ques.title %></h1>
+                            <p>Date: <%= item.ques.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="answers">
+                            <u><h4>Answers:</h4></u>
+                            <% item.answer.forEach(ans => { %>
+                            <li><h3><%= ans.answer%></h3>
+                                <p><%= ans.username %></p>
+                                <p>Date: <%= ans.createdAt %></p>
+                            </li>
+                            <% }); %>
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>
+
+
+
+
+
+
+
+                <% questionsWithAnswers.forEach(item => { %>
+                    <ul>
+                        <ul class="ques" >
+                            <h1><%= item.question.title %></h1>
+                            <p>Date: <%= item.question.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="answers">
+                            <u><h4>Answers:</h4></u>
+                            <% item.answers.forEach(answer => { %>
+                            <li><h3><%= answer.answer%></h3>
+                                <p><%= answer.username %></p>
+                                <p>Date: <%= answer.createdAt %></p>
+                            </li>
+                            <% }); %>
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>
+
+
+
+
+
+
+
+                <% answerWithQuestion.forEach(item => { %>
+                    <ul>
+                        <ul class="ques" >
+                            <h1><%= item.ans.answer %></h1>
+                            <p>Date: <%= item.ans.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="answers">
+                            <u><h4>Question:</h4></u>
+                            
+                            <% item.ques.forEach(question => { %>
+                                <li><h3><%= question.title%></h3>
+                                    <p><%= question.username %></p>
+                                    <p>Date: <%= question.createdAt %></p>
+                                </li>
+                                <% }); %>
+                            
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>

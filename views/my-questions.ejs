@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Questions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            background-color: rgb(3, 0, 31);
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            display:flex;
+            align-items: center;
+            /* margin-top: 20px; */
+            position: fixed;
+            top: 0;
+            padding-top: 20px;
+            width: 100%;
+            z-index: 10;
+            background-color: rgb(3, 0, 31);
+            transition: background-color 0.5s ease-in ;
+            /* background-color: white; */
+            border-bottom: solid 1px blue;
+            box-shadow: 0px 2px 5px beige;
+
+            
+        }
+
+
+        .left {
+            display: flex;
+            margin-left: 40px;
+            height: 60px;
+            color: rgb(0, 238, 255);
+            font-size: 50px;
+            font-weight: bolder;
+        }
+        .left h2 {
+            color: rgb(0, 238, 255);
+            font-size: 3.1rem;
+            font-weight: bolder;
+
+        }
+
+
+
+    
+        .right{
+            /* background-color: red; */
+            position: fixed;
+            right: 1.9rem;
+        }
+        .user-icon{
+            font-size: 2.5rem;
+            
+            
+        }
+        .dropdown-menu{
+            
+            background-color: rgb(80, 65, 241);
+            position: fixed;
+            /* bottom: 42rem; */
+            top: -50rem;
+            width: 17rem;
+            /* top: 5rem; */
+            right: 0rem;
+            height:50rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            
+            
+            transition: top 0.5s ease-in-out;
+            
+        }
+        .dropdown-menu.show{
+            top: 5rem;
+
+        }
+        .dropdown-menu ul{
+            width: 100%;
+            
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .dropdown-menu ul li{
+            text-align: center;
+            list-style: none;
+            font-size: 1.4rem;
+            text-transform: capitalize;
+            border-bottom: #07035d solid 1px;
+            width: 100%;
+            padding-bottom: 0.5rem;
+            padding-top: 0.5rem;
+            box-shadow: 0px 1px 2px ;
+            
+        }
+        .dropdown-menu ul li a{
+            color: aqua;
+            text-decoration: none;
+        }
+        .logout-btn{
+            position: relative;
+            top: 30rem;
+            margin: 0;
+
+            
+
+        }
+        .dropdown-menu a button{
+        
+
+            height: 40px;
+            width: 100px;
+            font-size: 20px;
+            text-transform: capitalize;
+            background-color:orange;
+            border-radius: 10px;
+            color: rgb(3, 10, 107);
+            margin-left: 20px;
+        }
+        .drop-icon{
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drop-icon.show{
+            
+            transform: rotate(180deg);
+
+        
+        }
+
+
+        /* popup controls */
+
+        .pop-container{
+            background-color: rgb(0, 0, 0);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            height: 50rem;
+            z-index:11;
+            display: none;
+
+        }
+        .pop-container.show{
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 50%;
+
+        }
+        .popup{
+            z-index: 20;
+            display: none;
+            background-color: rgb(44, 173, 176);
+            height: fit-content;
+            width: 30%;
+            position: fixed;
+            right: 30%;
+            top: 25%;
+            border-radius: 10px;
+            padding: 2rem;
+            border:solid 2px rgb(3, 3, 59);
+            box-shadow:5px 5px 10px rgb(3, 54, 69) ;
+            
+        }
+        .popup.show{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 100%;
+        }
+        .popup form{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .popup form input{
+            font-size: 1.2rem;
+            padding: 0.5rem;
+
+            margin: 10px 0px 20px;
+
+        }
+        .popup form textarea{
+            font-size: 1rem;
+            padding: 0.5rem;
+            height: 10rem;
+
+            margin: 10px 0px 20px;
+
+        }
+        .popup form button{
+            font-size: 1.2rem;
+            padding: 0.5rem;
+
+            margin: 10px 0px 20px;
+            background-color: orange;
+            
+        }
+
+        .popup-btn{
+            z-index: 12;
+
+            position: fixed;
+            left: 3rem;
+            bottom: 3rem;
+            font-size: 2rem;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color:orange;
+            font-size: 2rem;
+
+        }
+
+
+        /* mainbody styling  */
+
+        .mainbody{
+            position: relative;
+            top: 5rem;
+            display: flex;
+
+        }
+
+        .leftdiv, .rightdiv{
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            padding-top: 0;
+            /* background-color: red; */
+            width: 50%;
+            height: 42em;
+            background-color: rgb(17, 14, 51);
+            border-right: solid;
+        }
+        .title{
+            color: wheat;
+            font-size: 2rem;
+        }
+        .my-questions{
+            width: 100%;
+            
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            
+            padding: 0px 1rem;
+            text-align: justify ;
+            border-top: solid;
+            
+        }
+        .my-questions ul{
+            padding:1rem 1rem;
+            height: fit-content;
+            position: relative;
+            background-color: rgb(205, 221, 255);
+            border-radius: 5px;
+
+
+        }
+        .my-questions ul ul{
+           
+            padding: 0;
+
+        }
+        .my-questions ul .ques{
+            border: solid 1px rgb(4, 4, 87);
+            padding: 0px 10px;
+            box-shadow: 3px 3px 3px rgb(4, 4, 87);
+            background-color: rgb(192, 176, 176);
+            border-radius: 10px;
+        }
+        .my-questions ul .answers{
+            margin-top: 1rem;
+            padding-left: 2rem;
+            padding-right: 0.5rem;
+            list-style:square;
+            height: 20rem;
+            /* display: none; */
+
+            overflow-x: hidden;
+            overflow-y: auto;
+
+        }
+        /* .my-questions ul #answers.show{
+            display: block;
+        } */
+        .my-questions ul .answers li{
+            border-bottom: dotted 2px rgb(53, 3, 100);
+            
+        }
+
+        .rightdiv-ans{
+            height: fit-content;
+        }
+        .my-questions ul .right-ans{
+            height: fit-content;
+            padding-left: 2rem;
+            margin-top: 1rem;
+            list-style:square;
+        }
+        
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="left">
+            Stack-Overflow
+            
+        </div>
+        
+            
+            
+       
+        <div class="right">
+            <div class="user-icon" style="display: flex;">
+                <i class="fa-solid fa-circle-user" style=" color: rgb(0, 238, 255);"></i>
+                <div class="drop-icon" style="margin-left: 0.8rem; ">
+                    <i class="fa-solid fa-caret-down" style=" color: rgb(0, 238, 255); font-size: 2rem;"></i>
+                </div>
+               
+
+            </div>
+        </div>
+        
+        
+    </header>
+
+    <section class="mainbody">
+        <div class="leftdiv">
+            
+            <h1 class="title">My Questions</h1>
+            <div class="my-questions">
+
+                <!-- <ul>
+                    <ul class="ques"  id="ques">
+                        <h1>Q. Something I want to do with my dick?fhgfd sd   dgfg sfg ggsd fgsdgg lkh fshs shf sfhklf fsdhkjf fsdh fsdhjfssdf</h1>
+                        <p>Date: 22/04/2017</p>
+                    </ul>
+                    <ul class="answers" id="answers">
+                        <u><h4>Answers:</h4></u>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                    </ul>
+                </ul> -->
+                <% questionsWithAnswers.forEach(item => { %>
+                    <ul>
+                        <ul class="ques" >
+                            <h1><u><b>Q. </b></u> <%= item.question.title %></h1>
+                            <p>Date: <%= item.question.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="answers">
+                            <u><h4>Answers:</h4></u>
+                            <% item.answers.forEach(answer => { %>
+                            <li><h3><%= answer.answer%></h3>
+                                <p><%= answer.username %></p>
+                                <p>Date: <%= answer.createdAt %></p>
+                            </li>
+                            <% }); %>
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>
+                
+                
+               
+                
+            </div>
+        </div>
+        <div class="rightdiv">
+            <caption><h1 class="title">My Answeers</h1></caption>
+            <div class="my-questions">
+                <% answerWithQuestion.forEach(item => { %>
+                    <ul class="rightdiv-ans">
+                        <ul class="ques" >
+                            <h1><%= item.ans.answer %></h1>
+                            <p>Date: <%= item.ans.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="right-ans">
+                            <u><h4>Question</h4></u>
+                            
+                            <li><h3><%= item.ques.title%></h3>
+                                <p><%= item.ques.username %></p>
+                                <p>Date: <%= item.ques.createdAt %></p>
+                            </li>
+                           
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>
+                
+                
+
+                <!-- <ul>
+                    <ul class="ques"  id="ques">
+                        <h1>Q. Something I want to do with my dick?fhgfd sd   dgfg sfg ggsd fgsdgg lkh fshs shf sfhklf fsdhkjf fsdh fsdhjfssdf</h1>
+                        <p>Date: 22/04/2017</p>
+                    </ul>
+                    <ul class="answers" id="answers">
+                        <u><h4>Answers:</h4></u>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                    </ul>
+                </ul>
+                <ul>
+                    <ul class="ques" >
+                        <h1>Q. Something I want to do with my dick?fhgfd sd   dgfg sfg ggsd fgsdgg lkh fshs shf sfhklf fsdhkjf fsdh fsdhjfssdf</h1>
+                        <p>Date: 22/04/2017</p>
+                    </ul>
+                    <ul class="answers">
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                        <li><h3>My answer is something different from others going on to the campus placements</h3>
+                            <p>Author: JK. Rouling </p>
+                            <p>Date : 23/02/2018</p>
+                        </li>
+                    </ul>
+                </ul> -->
+            </div>
+        </div>
+    
+        <div class="dropdown-menu">
+            <ul>
+                
+                <li>
+                    <a href="/home">home</a>
+                    
+                </li>
+                <li>
+                    <a href="/my-question">view profile</a>
+                    
+                </li>
+               
+            </ul>
+
+            <a href="/logout" class="logout-btn"><button>Log Out</button></a>
+        </div>
+
+    </section>
+    <div class="pop-container">
+        <!-- hjkjhdsjhkkjhfkdhkjhkjshkjhd -->
+        
+
+    </div>
+    <div class="popup">
+
+        <h2>Post a Question</h2>
+        <form action="/question" method="POST">
+            <!-- <label for="title">Title:</label> -->
+            <input type="text" id="title" name="title" placeholder="Enter your question" required>
+            <!-- <label for="description">Description:</label> -->
+            <textarea id="description" name="description" placeholder="Enter more details about your question" required></textarea>
+            <button type="submit">Post Question</button>
+        </form>
+        
+    </div>
+   
+    <button class="popup-btn"><i class="fa-regular fa-comment"></i></button>
+   
+    <%- include('./partials/footer.ejs') %>
+
+
+    <script>
+        
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            const btn=document.querySelector('.user-icon');
+            const menu=document.querySelector('.dropdown-menu');
+            const drop_icon=document.querySelector('.drop-icon')
+            btn.addEventListener('click',()=>{
+                if(menu.classList.contains('show')){
+                    menu.classList.remove('show');
+                    drop_icon.classList.remove('show');
+                    
+                }
+                else{
+                    menu.classList.add('show');
+                    drop_icon.classList.add('show');
+
+                }
+                
+                
+            });
+
+           
+        });
+        document.addEventListener('DOMContentLoaded',()=>{
+            const popup=document.querySelector('.popup');
+            const pop_btn=document.querySelector('.popup-btn');
+            const pop_container=document.querySelector('.pop-container');
+
+            pop_btn.addEventListener('click',()=>{
+                if(popup.classList.contains('show')){
+                    popup.classList.remove('show');
+                    pop_container.classList.remove('show');
+
+                }
+                else{
+                    popup.classList.add('show');
+                    pop_container.classList.add('show');
+
+                }
+            });
+            window.addEventListener('click', (event) => {
+                if (event.target == pop_container) {
+                    popup.classList.remove('show');
+                    pop_container.classList.remove('show');
+                }
+            });
+
+            // const question=document.querySelector('#ques');
+            // const answers=document.querySelector('#answers');
+
+            // question.addEventListener('click',()=>{
+            //     if(answers.classList.contains('show')){
+            //         answers.classList.remove('show');
+
+            //     } else{
+            //         answers.classList.add('show');
+
+            //     }
+            // })
+        });
+    </script>
+
+    <!-- <h2>My Questions</h2>
+    <ul>
+        
+    </ul>
+    <p><a href="/question">Post a New Question</a></p>
+    <a href="/logout">Logout</a> -->
+</body>
+</html>

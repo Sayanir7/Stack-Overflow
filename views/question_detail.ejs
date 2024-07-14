@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= question.title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body{
+            background-color: rgb(3, 0, 31);
+            margin: 0px;
+            padding: 0px;
+        }
+        header {
+            display:flex;
+            align-items: center;
+            /* margin-top: 20px; */
+            position: fixed;
+            top: 0;
+            padding-top: 20px;
+            width: 100%;
+            z-index: 10;
+            background-color: rgb(3, 0, 31);
+            transition: background-color 0.5s ease-in ;
+            /* background-color: white; */
+            border-bottom: solid 1px blue;
+            box-shadow: 0px 2px 5px beige;
+
+            
+        }
+
+
+        .left {
+            display: flex;
+            margin-left: 40px;
+            height: 60px;
+            color: rgb(0, 238, 255);
+            font-size: 50px;
+            font-weight: bolder;
+        }
+        .left h2 {
+            color: rgb(0, 238, 255);
+            font-size: 50px;
+            font-weight: bolder;
+
+        }
+
+
+
+       
+        .right{
+            /* background-color: red; */
+            position: fixed;
+            right: 1.9rem;
+        }
+        .user-icon{
+            font-size: 2.5rem;
+            
+            
+        }
+        .dropdown-menu{
+            
+            background-color: rgb(80, 65, 241);
+            position: fixed;
+            /* bottom: 42rem; */
+            top: -50rem;
+            width: 17rem;
+            /* top: 5rem; */
+            right: 0rem;
+            height:50rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            
+            
+            transition: top 0.5s ease-in-out;
+            
+        }
+        .dropdown-menu.show{
+            top: 5rem;
+
+        }
+        .dropdown-menu ul{
+            width: 100%;
+            
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .dropdown-menu ul li{
+            text-align: center;
+            list-style: none;
+            font-size: 1.4rem;
+            text-transform: capitalize;
+            border-bottom: #07035d solid 1px;
+            width: 100%;
+            padding-bottom: 0.5rem;
+            padding-top: 0.5rem;
+            box-shadow: 0px 1px 2px ;
+            
+        }
+        .dropdown-menu ul li a{
+            color: aqua;
+            text-decoration: none;
+        }
+        .logout-btn{
+            position: relative;
+            top: 30rem;
+            margin: 0;
+
+            
+
+        }
+        .dropdown-menu a button{
+           
+
+            height: 40px;
+            width: 100px;
+            font-size: 20px;
+            text-transform: capitalize;
+            background-color:orange;
+            border-radius: 10px;
+            color: rgb(3, 10, 107);
+            margin-left: 20px;
+        }
+
+        .drop-icon.show{
+            /* animation: mymove 0.5s ; */
+            transform: rotate(180deg);
+
+           
+        }
+
+        /* main body styling */
+
+        .mainbody{
+            display: flex;
+            position: relative;
+            top: 5rem;
+
+        }
+        .leftdiv{
+            /* background-color: rgb(64, 1, 84); */
+            width: 34%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding:  2rem;
+
+            
+
+        }
+        .leftdiv h1{
+            font-size: 2rem;
+            color: rgb(201, 239, 239);
+        }
+        .leftdiv form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .leftdiv form textarea{
+            height: 15rem;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+
+
+
+        }
+        .leftdiv form button{
+            height: 40px;
+            width: 100%;
+            font-size: 20px;
+            text-transform: capitalize;
+            background-color:orange;
+            border-radius: 10px;
+            color: rgb(3, 10, 107);
+            
+
+        }
+        .rightdiv{
+            /* background-color: rgb(11, 82, 114); */
+            width: 66%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 41.8rem;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            background-color: rgb(192, 190, 211);
+            
+
+        }
+        .question{
+            background-color: rgb(192, 190, 211);
+            border-bottom: solid 1px;
+            box-shadow: 0px 5px 10px;
+            padding: 2rem;
+            /* background-color: #8584e0; */
+            border-radius: 10px;
+            
+
+
+        }
+        .description{
+            font-size: 1.2rem;
+        }
+
+        .answers{
+            /* background-color: #07035d; */
+            height: 100%;
+            
+            position: relative;
+            top: 2rem;
+            
+
+
+        }
+        .answer1{
+            display: flex;
+            border-bottom: solid 1px;
+            height: max-content;
+            padding: 2rem;
+        }
+        .answer1 li{
+            list-style: none;
+            height: max-content;
+
+        }
+        .the-answer{
+            font-size: 1.2rem ;
+            margin-bottom: 15px;
+            text-align: justify ;
+        }
+        .ans-details{
+            position: relative;
+            width: 100%;
+        }
+        .ans-details {
+            text-align: justify;
+        }
+        #dot{
+            position: relative;
+            top: 30px;
+
+            margin-right: 20px;
+        }
+        footer {
+            font-size: 1rem;
+            background-image: url(./pic/background.avif);
+            color: #fff;
+            background-size: cover;
+            padding-bottom: 0;
+            padding: 40px 0;
+            position:relative;
+            top: 7rem;
+            bottom: 0;
+            width: 100%;
+            border-radius: 0;
+            z-index: 1;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin: 20px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+        }
+
+        .footer-column p,
+        .footer-column ul {
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style-type: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #07035d;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a i {
+            /* width: 38px;
+            height: 8px; */
+            font-size: 30px;
+            color: #ccc;
+            /* background-color: #fff; */
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #444;
+            /* margin-top: 20px; */
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+        ::selection {
+            background-color: #0a0884;
+            color: #fff;
+        }
+
+
+        
+
+
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="left">
+            Stack-Overflow
+            
+        </div>
+        
+            
+            
+       
+        <div class="right">
+            <div class="user-icon" style="display: flex;">
+                <i class="fa-solid fa-circle-user" style=" color: rgb(0, 238, 255);"></i>
+                <div class="drop-icon" style="margin-left: 0.8rem; ">
+                    <i class="fa-solid fa-caret-down" style=" color: rgb(0, 238, 255); font-size: 2rem;"></i>
+                </div>
+               
+
+            </div>
+        </div>
+        
+        
+    </header>
+    <section class="mainbody">
+        
+        <div class="rightdiv">
+            <div class="question">
+                <h1>Q. <%= question.title %></h1>
+                <p class="description"><%= question.description %></p>
+                <p class="author"><%= question.username %></p>
+                <p class="date"><i class="fa-regular fa-calendar"></i> <%= question.createdAt %></p>
+
+            </div>
+            <div class="answers">
+                <h1 style="margin-left: 2rem; color: rgb(1, 1, 162);">Answers:</h1>
+                <% answers.forEach(answer => { %>
+                    <div class="answer1">
+                        <i class="fa-solid fa-circle-dot" id="dot" ></i>
+                        <div class="ans-details">
+                            <h2 class="the-answer"><%= answer.answer %></h2>
+                            <p>Answer by <%= answer.username %></p>
+                            <p><i class="fa-regular fa-calendar"></i> <%= answer.createdAt %></p>
+                            
+                        </div>
+                    </div>
+                    
+
+
+                    
+                       
+                        
+                        
+                        
+    
+                    
+                   
+                    
+                <% }); %>
+
+                <!-- <ul>
+                    <div>
+                        <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis neque fuga ipsa debitis commodi unde saepe, optio quo natus, eos impedit distinctio ex non cupiditate soluta fugit corrupti in error. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, modi necessitatibus! Ea, deserunt fuga? Alias quod, autem enim iusto iste reprehenderit eum inventore similique vitae ullam a fugit veritatis veniam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis minima quos facilis consequatur esse eligendi, provident perferendis explicabo iure assumenda corporis sit placeat rem. Ipsum eveniet ducimus unde nobis quam!</li>
+                        <li>lkdjfdhfkdhdhfjkfd</li>
+                    </div>
+                    
+                </ul>
+                <ul>
+                    <div>
+                        <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis neque fuga ipsa debitis commodi unde saepe, optio quo natus, eos impedit distinctio ex non cupiditate soluta fugit corrupti in error. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, modi necessitatibus! Ea, deserunt fuga? Alias quod, autem enim iusto iste reprehenderit eum inventore similique vitae ullam a fugit veritatis veniam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis minima quos facilis consequatur esse eligendi, provident perferendis explicabo iure assumenda corporis sit placeat rem. Ipsum eveniet ducimus unde nobis quam!</li>
+                        <li>lkdjfdhfkdhdhfjkfd</li>
+                    </div>
+                    
+                </ul> -->
+                
+                
+                
+            </div>
+            
+           
+        </div>
+        <div class="leftdiv">
+            <h1>Post an Anwer</h1>
+            <form action="/answer" method="POST" id="answerForm">
+                <input type="hidden" name="questionId" value="<%= question._id %>">
+                <input type="hidden" name="user" value="<%= question.username %>">
+                <!-- <label for="answer">Your Answer:</label><br> -->
+                <textarea id="answer" name="answer" rows="4" cols="50" placeholder="Enter Your Answer" required></textarea><br>
+                <button type="submit">Post</button>
+            </form>
+            
+        </div>
+        <div class="dropdown-menu">
+            <ul>
+                
+                <li>
+                    <a href="/home">home</a>
+                    
+                </li>
+               <li>
+                    <a href="/my-question">view profile</a>
+                    
+                </li>
+               
+            </ul>
+
+            <a href="/logout" class="logout-btn"><button>Log Out</button></a>
+        </div>
+    </section>
+
+
+    <%- include('./partials/footer.ejs') %>
+
+
+
+
+
+
+   
+
+
+    <script>
+        
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            const btn=document.querySelector('.user-icon');
+            const menu=document.querySelector('.dropdown-menu');
+            const drop_icon=document.querySelector('.drop-icon')
+            btn.addEventListener('click',()=>{
+                if(menu.classList.contains('show')){
+                    menu.classList.remove('show');
+                    drop_icon.classList.remove('show');
+                    
+                }
+                else{
+                    menu.classList.add('show');
+                    drop_icon.classList.add('show');
+
+                }
+                
+                
+            });
+        });
+
+        // document.getElementById('answerForm').addEventListener('submit', async function(event) {
+        //     if (response.status === 400) {
+        //         const data = await response.json();
+        //         alert(data.message);
+        //     } else if (response.status === 200) {
+        //         window.location.href = `/question/<%= question._id %>`;
+        //     } else {
+        //         alert('An error occurred. Please try again.');
+        //     }
+        // });
+    </script>
+</body>
+</html>
