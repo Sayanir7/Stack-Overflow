@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Questions</title>
+    <link rel="stylesheet" href="../public/css/header.css">
+    <link rel="stylesheet" href="../public/css/fotter.css">
+    <link rel="stylesheet" href="../public/css/popup.css">
+    <link rel="stylesheet" href="../public/css/my-question.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/fotter.css">
+    <link rel="stylesheet" href="/css/popup.css">
+    <link rel="stylesheet" href="/css/my-question.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+</head>
+<body>
+
+
+    
+   
+
+    <%- include('./partials/header.ejs') %>
+    
+
+    <section class="mainbody">
+        <div class="leftdiv">
+            
+            <h1 class="title">My Questions</h1>
+            <div class="my-questions">
+
+                
+                <% questionsWithAnswers.forEach(item => { %>
+                    <ul>
+                        <ul class="ques" >
+                            <h1><u><b>Q. </b></u> <%= item.question.title %> ?</h1>
+                            <p>Date: <%= item.question.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="answers">
+                            <u><h4>Answers:</h4></u>
+                            <% item.answers.forEach(answer => { %>
+                            <li><h3><%= answer.answer%>.</h3>
+                                <p>Author: <%= answer.username %></p>
+                                <p>Date: <%= answer.createdAt %></p>
+                            </li>
+                            <% }); %>
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>
+                
+                
+               
+                
+            </div>
+        </div>
+        <div class="rightdiv">
+            <caption><h1 class="title">My Answers</h1></caption>
+            <div class="my-questions">
+                <% answerWithQuestion.forEach(item => { %>
+                    <ul class="rightdiv-ans">
+                        <ul class="ques" >
+                            <h1><%= item.ans.answer %>.</h1>
+                            <p>Date: <%= item.ans.createdAt %></p>
+                        </ul>
+                        
+                        <ul class="right-ans">
+                            <u><h4>Question:</h4></u>
+                            
+                            <li><h3><%= item.ques.title%> ?</h3>
+                                <p>Author: <%= item.ques.username %></p>
+                                <p>Date: <%= item.ques.createdAt %></p>
+                            </li>
+                           
+                        
+                        </ul>
+
+                       
+                    </ul>
+                   
+                <% }); %>
+                
+                
+
+                
+            </div>
+        </div>
+    
+       
+
+    </section>
+   
+    
+    
+    <%- include('./partials/popup.ejs') %>
+    <%- include('./partials/footer.ejs') %>
+
+    
+
+
+
+
+    <!-- <script src="../public/js/popup.js"></script>
+    <script src="../public/js/dropdown.js"></script> -->
+
+    <script src="/js/popup.js"></script>
+    <script src="/js/dropdown.js"></script>
+
+   
+</body>
+</html>

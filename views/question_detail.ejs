@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= question.title %></title>
+    <!-- <link rel="stylesheet" href="../public/css/question-details.css">
+    <link rel="stylesheet" href="../public/css/header.css">
+    <link rel="stylesheet" href="../public/css/fotter.css">
+    <link rel="stylesheet" href="../public/css/popup.css"> -->
+    <link rel="stylesheet" href="/css/question-details.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/fotter.css">
+    <link rel="stylesheet" href="/css/popup.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    
+    <%-include('./partials/header.ejs') %>
+    
+
+
+
+    <section class="mainbody">
+        
+        <div class="rightdiv">
+            <div class="question">
+                <h1>Q. <%= question.title %> ?</h1>
+                <p class="description"><%= question.description %></p>
+                <p class="author">Author: <%= question.username %></p>
+                <p class="date"><i class="fa-regular fa-calendar"></i> <%= question.createdAt %></p>
+
+            </div>
+            <div class="answers">
+                <h1 style="margin-left: 2rem; color: rgb(1, 1, 162);">Answers:</h1>
+                <% answers.forEach(answer => { %>
+                    <div class="answer1">
+                        <i class="fa-solid fa-circle-dot" id="dot" ></i>
+                        <div class="ans-details">
+                            <h2 class="the-answer"><%= answer.answer %>.</h2>
+                            <p>Answer by: <%= answer.username %></p>
+                            <p><i class="fa-regular fa-calendar"></i> <%= answer.createdAt %></p>
+                            
+                        </div>
+                    </div>
+                    
+                <% }); %>
+
+               
+                
+                
+                
+            </div>
+            
+           
+        </div>
+        <div class="leftdiv">
+            <h1>Post an Anwer</h1>
+            <form action="/answer" method="POST" id="answerForm">
+                <input type="hidden" name="questionId" value="<%= question._id %>">
+                <input type="hidden" name="user" value="<%= question.username %>">
+                <!-- <label for="answer">Your Answer:</label><br> -->
+                <textarea id="answer" name="answer" rows="4" cols="50" placeholder="Enter Your Answer" required></textarea><br>
+                <button type="submit" class="form-btn" onclick="">Post</button>
+                
+                
+            </form>
+            
+        </div>
+       
+    </section>
+
+    
+
+    <%- include('./partials/popup.ejs') %>
+
+
+    <%- include('./partials/footer.ejs') %>
+   
+
+
+
+    <!-- <script src="../public/js/popup.js"></script>
+    <script src="../public/js/dropdown.js"></script> -->
+    <script src="/js/popup.js"></script>
+    <script src="/js/dropdown.js"></script>
+
+    
+    
+    <script>
+        document.getElementById('answerForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          
+          const formData = new FormData(this);
+          const data = Object.fromEntries(formData.entries());
+          
+          fetch('/answer', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => {
+            if (response.status === 400) {
+              return response.json().then(data => {
+                alert(data.message);
+                throw new Error(data.message); // To stop further processing
+              });
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (data.redirectUrl) {
+              window.location.href = data.redirectUrl;
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        });
+    </script>
+       
+   
+    
+
+
+
+   
+
+
+   
+</body>
+</html>

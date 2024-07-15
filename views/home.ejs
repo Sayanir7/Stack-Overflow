@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Questions</title>
+    <!-- <link rel="stylesheet" href="../public/css/fotter.css">
+    <link rel="stylesheet" href="../public/css/header.css">
+    <link rel="stylesheet" href="../public/css/home.css">
+    <link rel="stylesheet" href="../public/css/popup.css"> -->
+    <link rel="stylesheet" href="/css/fotter.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/popup.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+</head>
+<body>
+    
+    
+
+
+
+    <%- include('./partials/header.ejs') %>
+    
+
+    <section class="mainbody">
+        <div class="main-left"></div>
+        <div class="main-mid">
+            
+            <% questions.forEach(question => { %>
+                
+                <a href="/question/<%= question._id %>" style="text-decoration: none; color: black;">
+                    <ul class="eachQues">
+                        <h3><%= question.title %> ?</h3>
+                        <h5><u>Author: </u> <%= question.username %> </h5>
+                        
+                        <p><i class="fa-regular fa-calendar"></i> <%= question.createdAt %></p>
+                    </ul>
+                </a> 
+                
+            <% }); %>
+
+        </div>
+        <div class="main-right"></div>
+       
+    </section>
+
+
+   
+
+
+    <%- include('./partials/popup.ejs') %>
+   
+    <%- include('./partials/footer.ejs') %>
+
+   
+
+
+   
+
+
+    <!-- <script src="../public/js/popup.js"></script>
+    <script src="../public/js/dropdown.js"></script> -->
+    <script src="/js/popup.js"></script>
+    <script src="/js/dropdown.js"></script>
+
+</body>
+</html>

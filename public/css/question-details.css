@@ -1,0 +1,165 @@
+.mainbody{
+    display: flex;
+    position: relative;
+    top: 3rem;
+
+}
+.leftdiv{
+    
+    background-color: rgb(192, 190, 211);
+    width: 34%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:  2rem;
+
+    
+
+}
+.leftdiv h1{
+    font-size: 2rem;
+    color: rgb(10, 0, 50);
+}
+.leftdiv form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.leftdiv form textarea{
+    height: 15rem;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    background-color: rgb(192, 190, 211);
+
+
+}
+.leftdiv form textarea:focus{
+    background-color: #ffffff;
+   
+    
+}
+.leftdiv form button{
+    height: 40px;
+    width: 100%;
+    font-size: 20px;
+    text-transform: capitalize;
+    background-color:orange;
+    border-radius: 10px;
+    color: rgb(3, 10, 107);
+    margin-bottom: 2rem;
+
+}
+.rightdiv{
+    /* background-color: rgb(11, 82, 114); */
+    width: 66%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 41.8rem;
+    color: rgb(0, 0, 0);
+    padding:2rem;
+    background-color: rgb(192, 190, 211);
+    
+
+}
+.rightdiv::-webkit-scrollbar{
+    width: 2px;
+}
+.rightdiv::-webkit-scrollbar-thumb{
+    color: rgb(40, 255, 255);
+}
+.rightdiv::-webkit-scrollbar-button{
+    display: none;
+}
+.rightdiv::-webkit-scrollbar-track{
+    background-color: rgb(3, 3, 65);
+}
+
+.question{
+    
+    z-index: 3;
+    background-color: rgb(192, 190, 211);
+    border-bottom: solid 1px;
+    box-shadow: 0px 5px 10px;
+    padding: 2rem;
+    /* background-color: #8584e0; */
+    border-radius: 10px;
+    position:sticky;
+    top: 0;
+
+
+}
+.description{
+    font-size: 1.2rem;
+}
+
+.answers{
+    /* background-color: #07035d; */
+    height: 100%;
+    
+    position: relative;
+    top: 2rem;
+    
+
+
+}
+.answer1{
+    display: flex;
+    border-bottom: solid 1px;
+    height: max-content;
+    padding: 2rem;
+}
+.answer1 li{
+    list-style: none;
+    height: max-content;
+
+}
+.the-answer{
+    font-size: 1.2rem ;
+    margin-bottom: 15px;
+    text-align: justify ;
+}
+.ans-details{
+    position: relative;
+    width: 100%;
+}
+.ans-details {
+    text-align: justify;
+}
+#dot{
+    position: relative;
+    top: 30px;
+
+    margin-right: 20px;
+}
+
+
+@media (max-width:900px) {
+
+    .mainbody{
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        align-items: center
+    }
+    .rightdiv{
+        width: 100%;
+        padding: 0;
+
+
+
+    }
+    .leftdiv{
+        width: 100%;
+        padding: 0;
+    }
+    .leftdiv form{
+        width: 90%;
+    }
+    
+
+}
