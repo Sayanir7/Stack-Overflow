@@ -40,6 +40,7 @@ body{
     background-color: rgb(192, 190, 211);
     box-shadow: 5px 5px 5px rgb(4, 4, 123);
     padding: 0px 1rem;
+    
 }
 
 
@@ -103,6 +104,10 @@ body{
     }
     .main-mid{
         width: 95%;
+        padding:0;
+    }
+    .eachQues{
+        width:93%;
     }
     
 }
